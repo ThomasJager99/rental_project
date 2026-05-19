@@ -3,12 +3,21 @@ version: '3.9'
 services:
   web:
     build: .
+    container_name: rental_api
+    restart: unless-stopped
     ports:
       - "8000:8000"
     volumes:
       - .:/app
+      - sqlite_data:/app/db.sqlite3
     env_file:
       - .env
+    environment:
+      - DEBUG=True
+      - ALLOWED_HOSTS=127.0.0.1,localhost
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  sqlite_data:

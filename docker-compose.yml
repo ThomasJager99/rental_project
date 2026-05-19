@@ -1,7 +1,5 @@
-version: '3.9'
-
 services:
-  web:
+  sora:
     build: .
     container_name: rental_api
     restart: unless-stopped
